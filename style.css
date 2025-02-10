@@ -578,6 +578,7 @@ th:last-child{
 @media only screen and (max-width: 600px){
     .row{
         text-align: center;
+        display: block;
     }
 
     .col-2, .col-3, .col-4{
@@ -600,5 +601,14 @@ th:last-child{
     .cart-info p{
         display: none;
     }
+
+    
+    .app-logo img{
+        width: 50%;
+        margin: 10px auto;
+        display: block;
+    
+    }
+    
 
 }
