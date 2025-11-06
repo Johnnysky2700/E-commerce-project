@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     // ========== Menu Toggle ==========
-    const MenuItems = document.getElementById("Menuitems");
+    var MenuItems = document.getElementById("Menuitems");
+
     if (MenuItems) {
         MenuItems.style.maxHeight = "0px";
+
+        // Make menutoggle() available globally
         window.menutoggle = function () {
-            MenuItems.style.maxHeight = MenuItems.style.maxHeight === "0px" ? "200px" : "0px";
+            if (MenuItems.style.maxHeight === "0px") {
+                MenuItems.style.maxHeight = "200px"; // adjust height if needed
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
         };
     }
 
@@ -38,27 +44,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ========== Send Email ==========
-   async function sendEmail(event) {
-  event.preventDefault(); // stop page reload
+    async function sendEmail(event) {
+        event.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const message = document.getElementById("message").value;
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const message = document.getElementById("message").value;
 
-  const response = await fetch("/send-email", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ name, email, phone, message }),
-  });
+        const response = await fetch("/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ name, email, phone, message }),
+        });
 
-  const result = await response.json();
+        const result = await response.json();
 
-  if (result.success) {
-    alert("✅ Message sent successfully!");
-  } else {
-    alert("❌ Failed to send message.");
-  }
-}
-
+        if (result.success) {
+            alert("✅ Message sent successfully!");
+        } else {
+            alert("❌ Failed to send message.");
+        }
+    }
 });
